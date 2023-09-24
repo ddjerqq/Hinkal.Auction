@@ -1,0 +1,47 @@
+﻿@page "/winner"
+@using Hinkal.Domain.Services.Interfaces
+
+<PageTitle>Winner</PageTitle>
+
+<h1>Winner</h1>
+
+<form >
+    <div class="mb-3 text-start">
+        <label for="winnerId" class="form-label fw-bold text-info">
+            winner id
+        </label>
+        <input id="winnerId" class="form-control" value="@WinnerDto.WinnerId"/>
+    </div>
+
+    <div class="mb-3 text-start">
+        <label for="winnerBid" class="form-label fw-bold text-info">
+            winner bid
+        </label>
+        <input id="winnerBid" class="form-control" value="@WinnerDto.WinnerBid"/>
+    </div>
+
+    <div class="mb-3 text-start">
+        <label for="priceToPay" class="form-label fw-bold text-info">
+            price to pay
+        </label>
+        <input id="priceToPay" class="form-control" value="@WinnerDto.PriceToPay"/>
+    </div>
+
+    <div class="mb-3 text-start">
+        <label for="auctionKey" class="form-label fw-bold text-info">
+            auction key base 64
+        </label>
+        <input id="auctionKey" class="form-control" value="@WinnerDto.AuctionKeyBase64"/>
+    </div>
+</form>
+
+@code
+{
+    [Inject]
+    public IBidRecordStore BidRecordStore { get; set; } = null!;
+
+    [Inject]
+    public byte[] AuctionKey { get; set; } = null!;
+
+    public Domain.Models.Winner WinnerDto => BidRecordStore.GetWinner(AuctionKey);
+}

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hinkal.Domain", "Hinkal.Domain\Hinkal.Domain.csproj", "{0E232EC7-9EC1-4B73-A0FA-8C8543EEB010}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hinkal.Test", "Hinkal.Test\Hinkal.Test.csproj", "{643628EA-0809-4075-8171-181D28D3E5DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hinkal.WebUI", "Hinkal.WebUI\Hinkal.WebUI.csproj", "{C2C8C557-787E-4C7E-8B3E-F62C38F8895F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0E232EC7-9EC1-4B73-A0FA-8C8543EEB010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E232EC7-9EC1-4B73-A0FA-8C8543EEB010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E232EC7-9EC1-4B73-A0FA-8C8543EEB010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E232EC7-9EC1-4B73-A0FA-8C8543EEB010}.Release|Any CPU.Build.0 = Release|Any CPU
+		{643628EA-0809-4075-8171-181D28D3E5DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{643628EA-0809-4075-8171-181D28D3E5DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{643628EA-0809-4075-8171-181D28D3E5DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{643628EA-0809-4075-8171-181D28D3E5DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2C8C557-787E-4C7E-8B3E-F62C38F8895F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2C8C557-787E-4C7E-8B3E-F62C38F8895F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2C8C557-787E-4C7E-8B3E-F62C38F8895F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2C8C557-787E-4C7E-8B3E-F62C38F8895F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

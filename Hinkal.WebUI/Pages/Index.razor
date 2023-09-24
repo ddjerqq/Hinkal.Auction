@@ -1,0 +1,49 @@
+﻿@page "/"
+@using Hinkal.Domain.Services.Interfaces
+
+<PageTitle>Index</PageTitle>
+
+<h1>Welcome to bidding!</h1>
+
+<EditForm Model="BidRecord" OnSubmit="Submit">
+    <div class="mb-3 text-start">
+        <label for="userId" class="form-label fw-bold text-info">
+            Bidder id
+        </label>
+        <input value="@BidRecord.UserId"
+               autocomplete="off" class="form-control" id="userId" required/>
+    </div>
+
+    <div class="mb-3 text-start">
+        <label for="bidAmount" class="form-label fw-bold text-info">
+            Bid amount
+        </label>
+        <InputNumber TValue="decimal"
+                     @bind-Value="BidRecord.BidAmount"
+                     autocomplete="off" class="form-control" id="bidAmount" required/>
+    </div>
+
+    <div class="mb-3 text-start">
+        <button class="btn btn-success" type="submit">
+            bid
+        </button>
+    </div>
+</EditForm>
+
+
+@code
+{
+    [Inject]
+    public IBidRecordStore BidRecordStore { get; set; } = null!;
+
+    public BidRecord BidRecord { get; set; } = new BidRecord()
+    {
+        UserId = Guid.NewGuid(),
+    };
+
+    public void Submit()
+    {
+        BidRecordStore.Add(BidRecord);
+        ToastService.ShowSuccess("your bid was successfully placed");
+    }
+}

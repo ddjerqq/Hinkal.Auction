@@ -1,0 +1,81 @@
+﻿@page "/bids"
+@using Hinkal.Domain.Services.Interfaces
+@using Hinkal.Domain.Services
+
+<h3>All Bids</h3>
+
+<QuickGrid TGridItem="@((string, string))" Items="BidRecordDtos">
+    <PropertyColumn
+        TGridItem="@((string, string))"
+        TProp="string"
+        Title="bidder id (encrypted)"
+        Property="@(x => x.Item1)"/>
+
+    <PropertyColumn
+        TGridItem="@((string, string))"
+        TProp="string"
+        Title="bid amount (encrypted)"
+        Property="@(x => x.Item2)"/>
+</QuickGrid>
+
+<hr/>
+
+<h1>decrypt the data</h1>
+
+<EditForm Model="AuctionKeyBase64Input" OnSubmit="Submit">
+    <div class="mb-3 text-start">
+        <label for="auctionKey" class="form-label fw-bold text-info">
+            Auction Key base 64
+        </label>
+        <InputText @bind-Value="AuctionKeyBase64Input"
+                   autocomplete="off" class="form-control" id="auctionKey" required/>
+    </div>
+</EditForm>
+
+
+@code
+{
+    public string AuctionKeyBase64Input { get; set; } = string.Empty;
+
+    [Inject]
+    public IBidRecordStore BidRecordStore { get; set; } = new BidRecordStore();
+
+    [Inject]
+    public byte[] AuctionKey { get; set; } = null!;
+
+    private bool Decrypt
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(AuctionKeyBase64Input))
+                return false;
+
+            var auctionKeyBytes = Convert.FromBase64String(AuctionKeyBase64Input);
+            return !AuctionKey.Where((t, i) => auctionKeyBytes[i] != t).Any();
+        }
+    }
+
+    public IQueryable<(string, string)> BidRecordDtos
+    {
+        get
+        {
+            if (!Decrypt)
+            {
+                return BidRecordStore
+                    .GetBidRecordDtos(AuctionKey)
+                    .Select(x => (x.UserId, x.BidAmount))
+                    .AsQueryable();
+            }
+
+            // this is bad but its just for UI purposes
+            return BidRecordStore
+                .Select(x => (x.UserId.ToString(), x.BidAmount.ToString("N")))
+                .AsQueryable();
+        }
+    }
+
+    public void Submit()
+    {
+        StateHasChanged();
+    }
+}

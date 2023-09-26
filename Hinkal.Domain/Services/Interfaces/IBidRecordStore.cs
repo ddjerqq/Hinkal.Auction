@@ -1,4 +1,5 @@
-﻿using Hinkal.Domain.Models;
+﻿using System.Linq;
+using Hinkal.Domain.Models;
 
 namespace Hinkal.Domain.Services.Interfaces;
 
@@ -11,7 +12,7 @@ public interface IBidRecordStore : IList<BidRecord>
     {
         var winAmount = this
             .Select(x => x.BidAmount)
-            .Order()
+            .OrderBy(x => x)
             .LastOrDefault();
 
         var winners = this
